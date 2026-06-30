@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 1 English Placement Assessment</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#F0F4F8;color:#222;min-height:100vh}
+.wrap{max-width:740px;margin:0 auto;padding:1.5rem 1rem 4rem}
+.exam-hdr{background:#1F3864;color:#fff;border-radius:12px;padding:1.6rem;margin-bottom:1.4rem;text-align:center}
+.exam-hdr h1{font-size:19px;font-weight:700;letter-spacing:.3px}
+.exam-hdr p{font-size:12px;color:#D6E4F0;margin-top:6px;line-height:1.6}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:1.4rem}
+.ifield{background:#fff;border:1px solid #D0D7E2;border-radius:8px;padding:10px 13px}
+.ifield label{font-size:11px;color:#666;display:block;margin-bottom:3px;font-weight:600}
+.ifield input{width:100%;border:none;background:transparent;font-size:14px;color:#222;outline:none}
+.sec-hdr{display:flex;border-radius:10px;overflow:hidden;margin:1.5rem 0 1rem}
+.sec-letter{background:#1F3864;color:#fff;font-size:22px;font-weight:700;padding:14px 18px;display:flex;align-items:center;justify-content:center;min-width:56px}
+.sec-info{background:#D6E4F0;padding:11px 15px;flex:1}
+.sec-info h2{font-size:14px;font-weight:700;color:#1F3864}
+.sec-info p{font-size:11px;color:#444;margin-top:2px;line-height:1.5}
+.mbadge{display:inline-block;background:#1F3864;color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-top:4px;font-weight:600}
+.part-hdr{background:#EAECF2;border:1px solid #D0D7E2;border-radius:8px;padding:9px 13px;font-size:13px;font-weight:700;color:#1F3864;margin:1.2rem 0 .7rem}
+.instruct{background:#D6E4F0;border-radius:8px;padding:8px 12px;font-size:12px;color:#333;margin-bottom:.9rem;font-style:italic;line-height:1.5}
+.passage{background:#FAFAFA;border:1px solid #D0D7E2;border-left:5px solid #1F3864;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;font-size:13px;line-height:1.85}
+.passage h3{font-size:15px;font-weight:700;color:#1F3864;margin-bottom:8px}
+.passage h4{font-size:13px;font-weight:700;color:#1F3864;margin:10px 0 5px}
+.pic-blk{background:#F0F4F8;border:1px solid #D0D7E2;border-radius:8px;padding:8px;margin-bottom:10px;text-align:center}
+.pic-blk svg{width:100%;max-height:135px}
+.q-block{margin-bottom:1.4rem}
+.q-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.q-text{font-size:14px;line-height:1.65;flex:1}
+.q-num{font-weight:700}
+.listen-btn{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:2px solid #1F3864;background:#fff;color:#1F3864;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .15s;margin-top:1px}
+.listen-btn:hover{background:#D6E4F0}
+.listen-btn.playing{background:#1F3864;color:#fff}
+.circle-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.c-opt{background:#fff;border:2px solid #C5CFE0;border-radius:10px;padding:14px 12px;text-align:center;cursor:pointer;transition:all .15s;font-size:14px;line-height:1.4}
+.c-opt:hover{border-color:#1F3864;background:#EEF2FA}
+.c-opt.selected{border-color:#1F3864;background:#D6E4F0;font-weight:700}
+.c-opt.correct{border-color:#2A7A2A;background:#E6F4E6;color:#1A5C1A;font-weight:700}
+.c-opt.wrong{border-color:#C0392B;background:#FDECEA;color:#922B21}
+.mc-opts{display:flex;flex-direction:column;gap:6px}
+.mc-opt{background:#fff;border:2px solid #C5CFE0;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:13px;transition:all .15s;display:flex;align-items:center;gap:10px;text-align:left}
+.mc-opt:hover{border-color:#1F3864;background:#EEF2FA}
+.mc-opt.selected{border-color:#1F3864;background:#D6E4F0}
+.mc-opt.correct{border-color:#2A7A2A;background:#E6F4E6;color:#1A5C1A;font-weight:700}
+.mc-opt.wrong{border-color:#C0392B;background:#FDECEA;color:#922B21}
+.mc-opt .opt-l{font-weight:700;min-width:20px;color:#1F3864}
+.mc-opt.correct .opt-l,.mc-opt.wrong .opt-l{color:inherit}
+.match-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-top:8px}
+.match-word{background:#fff;border:2px solid #1F3864;border-radius:8px;padding:10px 13px;font-size:13px;text-align:center;font-weight:700;color:#1F3864}
+.match-def{background:#fff;border:1px solid #C5CFE0;border-radius:8px;padding:10px 13px;font-size:13px;text-align:center;color:#333}
+.match-mid{display:flex;flex-direction:column;gap:28px;align-items:center}
+.match-mid select{border:2px solid #C5CFE0;border-radius:8px;padding:8px 6px;font-size:12px;background:#fff;color:#222;cursor:pointer;width:130px;text-align:center}
+.match-mid select.correct{border-color:#2A7A2A;background:#E6F4E6}
+.match-mid select.wrong{border-color:#C0392B;background:#FDECEA}
+.audio-player{background:#fff;border:1px solid #D0D7E2;border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem}
+.audio-row{display:flex;align-items:center;gap:12px}
+.play-btn{width:42px;height:42px;border-radius:50%;background:#1F3864;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.play-btn:hover{background:#16305A}
+.audio-info strong{font-size:14px;color:#1F3864;display:block;margin-bottom:3px}
+.audio-info p{font-size:12px;color:#666}
+.teacher-sec{background:#FFF8DC;border:1px solid #E8D87A;border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem}
+.teacher-sec h3{font-size:13px;font-weight:700;color:#7A6000;margin-bottom:.7rem}
+.t-mark{display:flex;align-items:center;gap:10px;margin-top:8px}
+.t-mark label{font-size:12px;color:#555;flex:1;line-height:1.4}
+.t-mark input{width:58px;border:2px solid #C5CFE0;border-radius:8px;padding:6px 9px;font-size:13px;text-align:center;background:#fff;color:#222}
+.t-mark span{font-size:12px;color:#777;white-space:nowrap}
+.submit-row{text-align:center;margin:2.5rem 0 1rem}
+.submit-btn{background:#1F3864;color:#fff;border:none;border-radius:10px;padding:15px 44px;font-size:16px;cursor:pointer;font-weight:700;transition:opacity .15s;letter-spacing:.3px}
+.submit-btn:hover{opacity:.88}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed}
+.results{display:none;background:#fff;border:1px solid #D0D7E2;border-radius:12px;padding:1.5rem;margin-top:1.5rem}
+.results.show{display:block}
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:1rem 0}
+.score-card{background:#F0F4F8;border-radius:8px;padding:12px;text-align:center}
+.score-card .sc-lbl{font-size:11px;color:#666;margin-bottom:5px;font-weight:600}
+.score-card .sc-val{font-size:22px;font-weight:700;color:#1F3864}
+.score-card .sc-max{font-size:11px;color:#888}
+.total-box{text-align:center;padding:1.2rem;background:#D6E4F0;border-radius:10px;margin:1rem 0}
+.total-box .t-num{font-size:38px;font-weight:700;color:#1F3864}
+.total-box .t-lbl{font-size:13px;color:#555;margin-top:4px}
+.cefr-badge{display:inline-block;background:#1F3864;color:#fff;padding:5px 16px;border-radius:12px;font-size:13px;margin-top:10px;font-weight:600}
+.saving-msg{font-size:13px;color:#666;text-align:center;margin-top:10px;min-height:20px}
+.error-msg{color:#C0392B;font-size:12px;text-align:center;margin-top:6px;display:none}
+@media(max-width:500px){
+  .info-grid{grid-template-columns:1fr}
+  .score-grid{grid-template-columns:repeat(2,1fr)}
+  .match-wrap{grid-template-columns:1fr;gap:6px}
+  .match-mid{flex-direction:row;flex-wrap:wrap;gap:8px}
+  .match-mid select{width:100%}
+}
+</style>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
+</head>
+<body>
+<div class="wrap">
+
+<div class="exam-hdr">
+  <h1>&#127891; ENGLISH PLACEMENT ASSESSMENT — GRADE 1</h1>
+  <p>All written questions: 2 marks each &nbsp;·&nbsp; Total: 60 marks<br>
+  Press the &#128266; button beside any question to hear it read aloud</p>
+</div>
+
+<div class="info-grid">
+  <div class="ifield"><label>Student Name</label><input id="f-name" type="text" placeholder="Full name" required></div>
+  <div class="ifield"><label>Class</label><input id="f-class" type="text" placeholder="e.g. 1A"></div>
+  <div class="ifield"><label>Date</label><input id="f-date" type="date"></div>
+  <div class="ifield"><label>Examiner</label><input id="f-examiner" type="text" placeholder="Examiner name"></div>
+</div>
+
+<!-- ══════════════ SECTION A ══════════════ -->
+<div class="sec-hdr">
+  <div class="sec-letter">A</div>
+  <div class="sec-info">
+    <h2>Reading: Literary &amp; Informational Text</h2>
+    <p>CCSS: RL.1.1 · RL.1.2 · RL.1.3 · RL.1.4 · RI.1.1 · RI.1.2 &nbsp;|&nbsp; CEFR: Pre-A1–A1</p>
+    <span class="mbadge">10 marks &nbsp;(5 × 2)</span>
+  </div>
+</div>
+
+<div class="instruct">&#128204; Read the passage carefully. Then circle A or B — the correct answer. Press &#128266; to hear any question read aloud.</div>
+
+<div class="pic-blk">
+<svg viewBox="0 0 520 135" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="135" fill="#EEF2FA" rx="8"/>
+  <rect x="20" y="15" width="58" height="105" rx="4" fill="#C9A96E"/>
+  <rect x="22" y="17" width="54" height="101" rx="3" fill="#D4B483"/>
+  <circle cx="71" cy="68" r="4" fill="#8B6914"/>
+  <circle cx="158" cy="36" r="16" fill="#FDBCB4"/>
+  <ellipse cx="158" cy="34" rx="17" ry="13" fill="#4A3728"/>
+  <rect x="139" y="51" width="38" height="55" rx="6" fill="#5B8FD4"/>
+  <rect x="129" y="66" width="16" height="8" rx="4" fill="#FDBCB4"/>
+  <rect x="167" y="82" width="16" height="8" rx="4" fill="#FDBCB4"/>
+  <rect x="143" y="103" width="13" height="24" rx="4" fill="#3A6DB5"/>
+  <rect x="158" y="103" width="13" height="24" rx="4" fill="#3A6DB5"/>
+  <rect x="124" y="62" width="38" height="27" rx="6" fill="#F0E6D3" stroke="#C9A96E" stroke-width="1.5"/>
+  <line x1="124" y1="70" x2="162" y2="70" stroke="#C9A96E" stroke-width="1" opacity=".5"/>
+  <line x1="124" y1="78" x2="162" y2="78" stroke="#C9A96E" stroke-width="1" opacity=".5"/>
+  <ellipse cx="228" cy="96" rx="27" ry="20" fill="#888"/>
+  <ellipse cx="228" cy="72" rx="18" ry="16" fill="#888"/>
+  <polygon points="217,58 213,44 223,56" fill="#888"/>
+  <polygon points="239,58 243,44 233,56" fill="#888"/>
+  <ellipse cx="228" cy="72" rx="10" ry="8" fill="#AAA"/>
+  <circle cx="222" cy="70" r="3" fill="#333"/>
+  <circle cx="234" cy="70" r="3" fill="#333"/>
+  <ellipse cx="228" cy="77" rx="3.5" ry="2" fill="#FFB6C1"/>
+  <ellipse cx="218" cy="90" rx="2.5" ry="3.5" fill="#7AB8E8" opacity=".7"/>
+  <ellipse cx="238" cy="86" rx="2" ry="3" fill="#7AB8E8" opacity=".7"/>
+  <ellipse cx="226" cy="108" rx="2" ry="2.5" fill="#7AB8E8" opacity=".7"/>
+  <ellipse cx="308" cy="122" rx="26" ry="8" fill="#E8E8E8" stroke="#CCC" stroke-width="1"/>
+  <ellipse cx="308" cy="120" rx="22" ry="5.5" fill="white"/>
+  <rect x="338" y="22" width="168" height="52" rx="8" fill="white" stroke="#1F3864" stroke-width="1.5"/>
+  <polygon points="358,74 370,74 364,86" fill="white" stroke="#1F3864" stroke-width="1.5"/>
+  <polygon points="359,74 369,74 364,83" fill="white"/>
+  <text x="422" y="44" text-anchor="middle" font-family="Arial" font-size="11" fill="#1F3864" font-weight="700">Kim and the Cat</text>
+  <text x="422" y="60" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Kim helps a cold, wet cat</text>
+</svg>
+</div>
+
+<div class="passage">
+  <h3>Kim and the Cat</h3>
+  <p>Kim sees a small cat near her door. The cat is wet and cold. Kim feels sad for it.</p>
+  <p style="margin-top:8px">She goes inside. She gets a towel. She dries the cat. She gives it some milk.</p>
+  <h4>Why Kim Helps</h4>
+  <p>Kim helps because she is kind. She says: <em>"All animals need care."</em></p>
+</div>
+
+<div id="sec-a"></div>
+
+<!-- ══════════════ SECTION B ══════════════ -->
+<div class="sec-hdr">
+  <div class="sec-letter">B</div>
+  <div class="sec-info">
+    <h2>Vocabulary &amp; Word Meaning</h2>
+    <p>CCSS: L.1.4 · L.1.4a · L.1.5 · L.1.5b &nbsp;|&nbsp; CEFR: Pre-A1–A1</p>
+    <span class="mbadge">10 marks &nbsp;(5 × 2)</span>
+  </div>
+</div>
+
+<div class="part-hdr">Part 1 — Same Meaning &nbsp;(Q6–7, 2 marks each)</div>
+<div class="instruct">&#128204; Circle A or B — choose the word that means the SAME as the word in bold.</div>
+<div id="sec-b1"></div>
+
+<div class="part-hdr">Part 2 — Opposite Meaning &nbsp;(Q8–9, 2 marks each)</div>
+<div class="instruct">&#128204; Circle A or B — choose the word that means the OPPOSITE of the word in bold.</div>
+<div id="sec-b2"></div>
+
+<div class="part-hdr">Part 3 — Matching &nbsp;(Q10, 2 marks)</div>
+<div class="instruct">&#128204; Use the menus to match each word to its meaning.</div>
+<div class="q-block">
+  <div class="q-row">
+    <button class="listen-btn" onclick="speak('Question 10. Match the words to their meanings. The word kind. The word care.',this)" aria-label="Listen to question 10">&#128266;</button>
+    <p class="q-text"><span class="q-num">10.</span> Match each word to its meaning.</p>
+  </div>
+  <div class="match-wrap">
+    <div>
+      <div class="match-word" style="margin-bottom:20px">kind</div>
+      <div class="match-word">care</div>
+    </div>
+    <div class="match-mid">
+      <select id="mk"><option value="">— choose —</option><option value="a">gentle and good to others</option><option value="b">to look after someone</option></select>
+      <select id="mc"><option value="">— choose —</option><option value="a">gentle and good to others</option><option value="b">to look after someone</option></select>
+    </div>
+    <div>
+      <div class="match-def" style="margin-bottom:20px">gentle and good to others</div>
+      <div class="match-def">to look after someone</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION C ══════════════ -->
+<div class="sec-hdr">
+  <div class="sec-letter">C</div>
+  <div class="sec-info">
+    <h2>Language Usage: Grammar &amp; Mechanics</h2>
+    <p>CCSS: L.1.1 · L.1.1a–h · L.1.2 · L.1.2a–d &nbsp;|&nbsp; CEFR: Pre-A1–A1</p>
+    <span class="mbadge">20 marks &nbsp;(10 × 2)</span>
+  </div>
+</div>
+
+<div class="part-hdr">Part 1 — Grammar &nbsp;(Q11–17, 2 marks each)</div>
+<div class="instruct">&#128204; Circle the letter that best completes the sentence.</div>
+<div id="sec-c1"></div>
+
+<div class="part-hdr">Part 2 — Capitalisation &amp; Punctuation &nbsp;(Q18–20, 2 marks each)</div>
+<div class="instruct">&#128204; Circle the letter of the correctly written sentence.</div>
+<div id="sec-c2"></div>
+
+<!-- ══════════════ SECTION D ══════════════ -->
+<div class="sec-hdr">
+  <div class="sec-letter">D</div>
+  <div class="sec-info">
+    <h2>Listening &amp; Speaking &nbsp;<span style="font-size:11px;font-weight:400">[Examiner section]</span></h2>
+    <p>CCSS: SL.1.1 · SL.1.2 · SL.1.3 · SL.1.4 · SL.1.6 &nbsp;|&nbsp; CEFR: Pre-A1–A1</p>
+    <span class="mbadge">20 marks</span>
+  </div>
+</div>
+
+<div class="part-hdr">Part 1 — Listening Comprehension &nbsp;(10 marks)</div>
+<div class="instruct">&#128204; Press play. The passage plays twice automatically. Then ask questions orally.</div>
+
+<div class="audio-player">
+  <div class="audio-row">
+    <button class="play-btn" id="pbtn" onclick="togglePassage()" aria-label="Play listening passage">&#9654;</button>
+    <div class="audio-info">
+      <strong>Listening Passage — Tom and Pip</strong>
+      <p id="astatus">Press play to begin &nbsp;·&nbsp; passage plays twice automatically</p>
+    </div>
+  </div>
+</div>
+
+<div class="passage" style="margin-bottom:.9rem">
+  <p style="font-size:11px;font-weight:700;color:#1F3864;margin-bottom:7px">EXAMINER REFERENCE — Passage text:</p>
+  <p style="font-size:13px">Tom has a small dog. His dog's name is Pip. Pip loves to run in the garden. One day, Pip runs out of the gate. Tom is scared. He calls Pip's name. He looks behind every tree. Then he hears a bark. Pip is under the big chair. Tom gives Pip a hug. He is very happy.</p>
+</div>
+
+<div class="pic-blk">
+<svg viewBox="0 0 520 125" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="125" fill="#EEF2FA" rx="8"/>
+  <rect x="0" y="96" width="520" height="29" fill="#C0DD97"/>
+  <rect x="48" y="42" width="9" height="64" fill="#8B6914"/>
+  <ellipse cx="52" cy="34" rx="28" ry="24" fill="#639922"/>
+  <ellipse cx="38" cy="45" rx="18" ry="16" fill="#3B6D11"/>
+  <rect x="340" y="52" width="70" height="50" rx="4" fill="#C9A96E"/>
+  <rect x="334" y="42" width="82" height="15" rx="4" fill="#D4B483"/>
+  <rect x="340" y="98" width="12" height="24" rx="3" fill="#B8935A"/>
+  <rect x="398" y="98" width="12" height="24" rx="3" fill="#B8935A"/>
+  <ellipse cx="374" cy="108" rx="22" ry="10" fill="#D4A96E"/>
+  <ellipse cx="358" cy="102" rx="14" ry="11" fill="#D4A96E"/>
+  <polygon points="350,92 345,81 357,94" fill="#D4A96E"/>
+  <polygon points="366,92 371,81 361,94" fill="#D4A96E"/>
+  <circle cx="353" cy="100" r="2.5" fill="#333"/>
+  <circle cx="360" cy="100" r="2.5" fill="#333"/>
+  <path d="M394 108 Q404 97 409 104" stroke="#D4A96E" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="33" r="16" fill="#FDBCB4"/>
+  <ellipse cx="200" cy="31" rx="17" ry="12" fill="#4A3728"/>
+  <rect x="183" y="48" width="34" height="50" rx="6" fill="#E8532A"/>
+  <rect x="174" y="60" width="15" height="8" rx="4" fill="#FDBCB4"/>
+  <rect x="203" y="60" width="15" height="8" rx="4" fill="#FDBCB4"/>
+  <rect x="187" y="95" width="12" height="22" rx="4" fill="#2244AA"/>
+  <rect x="201" y="95" width="12" height="22" rx="4" fill="#2244AA"/>
+  <circle cx="194" cy="33" r="2.5" fill="#333"/>
+  <circle cx="206" cy="33" r="2.5" fill="#333"/>
+  <path d="M194 40 Q200 37 206 40" stroke="#333" stroke-width="1.2" fill="none"/>
+  <rect x="220" y="10" width="135" height="36" rx="8" fill="white" stroke="#1F3864" stroke-width="1.5"/>
+  <polygon points="238,46 250,46 244,57" fill="white" stroke="#1F3864" stroke-width="1.5"/>
+  <polygon points="239,46 249,46 244,54" fill="white"/>
+  <text x="287" y="28" text-anchor="middle" font-family="Arial" font-size="11" fill="#1F3864" font-weight="700">Pip! Pip! Where are you?</text>
+  <text x="287" y="42" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">Tom searches everywhere</text>
+</svg>
+</div>
+
+<div class="teacher-sec">
+  <h3>&#128221; Examiner — enter listening marks after oral assessment</h3>
+  <div class="t-mark"><label>L1 — What is the name of the dog?</label><input type="number" id="L1" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <div class="t-mark"><label>L2 — What does Pip love to do?</label><input type="number" id="L2" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <div class="t-mark"><label>L3 — Where is Pip when Tom finds him?</label><input type="number" id="L3" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <div class="t-mark"><label>L4 — How does Tom feel? (scared + happy)</label><input type="number" id="L4" min="0" max="4" placeholder="0–4"><span>/ 4</span></div>
+</div>
+
+<div class="part-hdr">Part 2 — Speaking &nbsp;(10 marks) — Examiner marks only</div>
+
+<div class="pic-blk">
+<svg viewBox="0 0 520 118" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="118" fill="#EAF3DE" rx="8"/>
+  <rect x="0" y="90" width="520" height="28" fill="#97C459"/>
+  <circle cx="466" cy="22" r="17" fill="#EF9F27"/>
+  <rect x="28" y="46" width="9" height="54" fill="#8B6914"/>
+  <ellipse cx="32" cy="39" rx="27" ry="23" fill="#639922"/>
+  <rect x="190" y="76" width="76" height="8" rx="3" fill="#C9A96E"/>
+  <rect x="195" y="84" width="7" height="18" rx="2" fill="#B8935A"/>
+  <rect x="252" y="84" width="7" height="18" rx="2" fill="#B8935A"/>
+  <ellipse cx="128" cy="56" rx="13" ry="10" fill="#5B8FD4"/>
+  <circle cx="120" cy="53" r="4" fill="#185FA5"/>
+  <polygon points="115,55 110,58 116,59" fill="#EF9F27"/>
+  <polygon points="128,47 121,43 129,45" fill="#5B8FD4"/>
+  <path d="M128 65 Q116 77 106 88" stroke="#5B8FD4" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M128 65 Q140 75 150 86" stroke="#5B8FD4" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="315" cy="86" rx="18" ry="13" fill="#888"/>
+  <ellipse cx="315" cy="71" rx="13" ry="11" fill="#888"/>
+  <polygon points="307,61 304,52 313,61" fill="#888"/>
+  <polygon points="323,61 326,52 317,61" fill="#888"/>
+  <circle cx="309" cy="69" r="2.5" fill="#333"/>
+  <circle cx="321" cy="69" r="2.5" fill="#333"/>
+  <path d="M298 97 Q306 93 315 97" stroke="#888" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <ellipse cx="420" cy="89" rx="24" ry="12" fill="#D4A96E"/>
+  <ellipse cx="400" cy="83" rx="15" ry="12" fill="#D4A96E"/>
+  <polygon points="392,73 387,63 400,75" fill="#D4A96E"/>
+  <polygon points="406,73 410,63 400,75" fill="#D4A96E"/>
+  <circle cx="388" cy="79" r="2.5" fill="#333"/>
+  <circle cx="395" cy="79" r="2.5" fill="#333"/>
+  <path d="M440 89 Q451 79 454 86" stroke="#D4A96E" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text x="260" y="16" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#1F3864">Animals at the Park — Speaking Task</text>
+  <text x="260" y="30" text-anchor="middle" font-family="Arial" font-size="10" fill="#444">What can you see? What are the animals doing?</text>
+</svg>
+</div>
+
+<div class="teacher-sec">
+  <h3>&#128221; Task S1 — Picture Description (max 6 marks: 3 × 2)</h3>
+  <div class="t-mark"><label>Content &amp; Detail — names 3+ things, uses adjectives/action words</label><input type="number" id="S1a" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <div class="t-mark"><label>Language Accuracy — mostly correct Pre-A1/A1, errors don't block meaning</label><input type="number" id="S1b" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <div class="t-mark"><label>Fluency &amp; Confidence — short sentences, no prompting needed</label><input type="number" id="S1c" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <h3 style="margin-top:1rem">&#128221; Task S2 — Personal Questions (max 4 marks: 2 × 2)</h3>
+  <p style="font-size:13px;margin:.5rem 0 .3rem;color:#555"><strong>S1:</strong> What is your favourite animal? Tell me about it.</p>
+  <div class="t-mark"><label>Q1 mark</label><input type="number" id="S2a" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+  <p style="font-size:13px;margin:.6rem 0 .3rem;color:#555"><strong>S2:</strong> Do you have a pet? Or do you want one? Why?</p>
+  <div class="t-mark"><label>Q2 mark</label><input type="number" id="S2b" min="0" max="2" placeholder="0–2"><span>/ 2</span></div>
+</div>
+
+<div class="submit-row">
+  <button class="submit-btn" id="submit-btn" onclick="submitExam()">Submit &amp; Auto-Mark</button>
+  <div class="saving-msg" id="saving-msg"></div>
+  <div class="error-msg" id="error-msg">Could not save to Google Sheets. Score shown below — please record manually.</div>
+</div>
+
+<div class="results" id="results">
+  <h2 style="font-size:17px;font-weight:700;margin-bottom:1rem;color:#1F3864">Results — <span id="r-name"></span></h2>
+  <div class="score-grid">
+    <div class="score-card"><div class="sc-lbl">Section A</div><div class="sc-val" id="sc-a">—</div><div class="sc-max">/ 10</div></div>
+    <div class="score-card"><div class="sc-lbl">Section B</div><div class="sc-val" id="sc-b">—</div><div class="sc-max">/ 10</div></div>
+    <div class="score-card"><div class="sc-lbl">Section C</div><div class="sc-val" id="sc-c">—</div><div class="sc-max">/ 20</div></div>
+    <div class="score-card"><div class="sc-lbl">Section D</div><div class="sc-val" id="sc-d">—</div><div class="sc-max">/ 20</div></div>
+  </div>
+  <div class="total-box">
+    <div class="t-num"><span id="r-total">—</span> / 60</div>
+    <div class="t-lbl">Total Score &nbsp;·&nbsp; <span id="r-pct">—</span>%</div>
+    <div><span class="cefr-badge" id="r-cefr">—</span></div>
+  </div>
+  <p style="font-size:12px;color:#888;text-align:center;margin-top:.5rem" id="r-saved"></p>
+</div>
+
+</div><!-- end wrap -->
+
+<script>
+// ═══════════════════════════════════════════════════════
+// CONFIGURATION — paste your Google Apps Script URL here
+// ═══════════════════════════════════════════════════════
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzdQNBlYi0HwuELc9bha42mU8ksh6Hv93BAG7Eu7bYx1UpS8k_36gC_QfiOLPGawlLD/exec";
+
+// ═══════════════════════════════════════════════════════
+// QUESTION DATA
+// ═══════════════════════════════════════════════════════
+const QS = {
+  a:[
+    {id:"q1",text:"How does the cat feel when Kim finds it?",opts:["wet and cold","big and happy"],correct:"A"},
+    {id:"q2",text:"What does Kim get to help the cat?",opts:["a ball","a towel"],correct:"B"},
+    {id:"q3",text:"What does Kim give the cat to drink?",opts:["milk","water"],correct:"A"},
+    {id:"q4",text:"Why does Kim help the cat?",opts:["she is kind","her mum says to"],correct:"A"},
+    {id:"q5",text:"Where does Kim find the cat?",opts:["near her door","in the garden"],correct:"A"},
+  ],
+  b1:[
+    {id:"q6",text:"The cat is small. Choose the word with the SAME meaning.",opts:["tiny","loud"],correct:"A"},
+    {id:"q7",text:"Kim is happy. Choose the word with the SAME meaning.",opts:["sad","glad"],correct:"B"},
+  ],
+  b2:[
+    {id:"q8",text:"The cat is wet. Choose the word with the OPPOSITE meaning.",opts:["dry","cold"],correct:"A"},
+    {id:"q9",text:"The cat feels cold. Choose the word with the OPPOSITE meaning.",opts:["wet","warm"],correct:"B"},
+  ],
+  c1:[
+    {id:"q11",text:'The cat ______ near the door every day.',opts:["A) sit","B) sits","C) sitting","D) sitted"],correct:"B"},
+    {id:"q12",text:"Which sentence uses the correct plural?",opts:["A) Kim has two cat.","B) Kim has two cats.","C) Kim has two cates.","D) Kim has two catss."],correct:"B"},
+    {id:"q13",text:"Which word is a noun — a person, place, or thing?",opts:["A) run","B) happy","C) cat","D) wet"],correct:"C"},
+    {id:"q14",text:"The cat is small. Kim is tall. Kim is ______ than the cat.",opts:["A) tall","B) taller","C) tallest","D) more tall"],correct:"B"},
+    {id:"q15",text:'Which word is a verb — an action word — in: "Kim dries the cat"?',opts:["A) Kim","B) the","C) cat","D) dries"],correct:"D"},
+    {id:"q16",text:"Kim helps the cat ______ it is cold and wet.",opts:["A) but","B) or","C) because","D) and"],correct:"C"},
+    {id:"q17",text:"Kim finds ______ old cat near her door.",opts:["A) a","B) an","C) the","D) some"],correct:"B"},
+  ],
+  c2:[
+    {id:"q18",text:"Which sentence uses a capital letter correctly at the beginning?",opts:["A) my name is kim.","B) My name is Kim.","C) my name is Kim.","D) My Name Is Kim."],correct:"B"},
+    {id:"q19",text:"Which sentence ends with the correct mark?",opts:["A) Kim helps the cat?","B) Kim helps the cat.","C) Kim helps the cat,","D) kim helps the cat."],correct:"B"},
+    {id:"q20",text:"Which sentence is correct?",opts:["A) i love cats.","B) I love cats.","C) I Love Cats.","D) i Love cats."],correct:"B"},
+  ]
+};
+
+const sel = {};
+let activeListenBtn = null;
+
+// ── SPEECH ──────────────────────────────────────────────
+function speak(text, btn) {
+  // Stop any currently playing audio
+  if (typeof responsiveVoice !== "undefined") responsiveVoice.cancel();
+  if (activeListenBtn && activeListenBtn !== btn) {
+    activeListenBtn.classList.remove("playing");
+    activeListenBtn.innerHTML = "&#128266;";
+  }
+  // Toggle off if already playing
+  if (btn.classList.contains("playing")) {
+    btn.classList.remove("playing");
+    btn.innerHTML = "&#128266;";
+    activeListenBtn = null;
+    return;
+  }
+  btn.classList.add("playing");
+  btn.innerHTML = "&#9646;&#9646;";
+  activeListenBtn = btn;
+  const done = () => {
+    btn.classList.remove("playing");
+    btn.innerHTML = "&#128266;";
+    if (activeListenBtn === btn) activeListenBtn = null;
+  };
+  if (typeof responsiveVoice !== "undefined") {
+    responsiveVoice.speak(text, "UK English Female", { rate: 0.85, pitch: 1.1, onend: done });
+  } else {
+    // Fallback to browser TTS if ResponsiveVoice not loaded
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-GB"; u.rate = 0.82; u.pitch = 1.1;
+    // Try to pick a female voice
+    const voices = speechSynthesis.getVoices();
+    const female = voices.find(v => v.lang.startsWith("en") && /female|woman|zira|hazel|susan|karen|samantha/i.test(v.name));
+    if (female) u.voice = female;
+    u.onend = done;
+    speechSynthesis.speak(u);
+  }
+}
+
+// ── BUILD CIRCLE QUESTIONS ───────────────────────────────
+function buildCircle(q, num, container) {
+  const speakTxt = `Question ${num}. ${q.text}. Option A: ${q.opts[0]}. Option B: ${q.opts[1]}.`;
+  const d = document.createElement("div");
+  d.className = "q-block";
+  d.innerHTML = `
+  <div class="q-row">
+    <button class="listen-btn" onclick="speak('${speakTxt.replace(/'/g,"\\'").replace(/"/g,"&quot;")}',this)" aria-label="Listen to question ${num}">&#128266;</button>
+    <p class="q-text"><span class="q-num">${num}.</span> ${q.text}</p>
+  </div>
+  <div class="circle-row">
+    <div class="c-opt" data-id="${q.id}" data-val="A" onclick="pickC(this,'${q.id}','A')"><strong>A)</strong>&nbsp; ${q.opts[0]}</div>
+    <div class="c-opt" data-id="${q.id}" data-val="B" onclick="pickC(this,'${q.id}','B')"><strong>B)</strong>&nbsp; ${q.opts[1]}</div>
+  </div>`;
+  container.appendChild(d);
+}
+
+// ── BUILD MC QUESTIONS ───────────────────────────────────
+function buildMC(q, num, container) {
+  const speakTxt = `Question ${num}. ${q.text}. ${q.opts.join(". ")}.`;
+  const d = document.createElement("div");
+  d.className = "q-block";
+  const optsHtml = q.opts.map((o,i) => {
+    const L = ["A","B","C","D"][i];
+    return `<div class="mc-opt" data-id="${q.id}" data-val="${L}" onclick="pickM(this,'${q.id}','${L}')"><span class="opt-l">${L}</span>${o.replace(/^[A-D]\) /,"")}</div>`;
+  }).join("");
+  d.innerHTML = `
+  <div class="q-row">
+    <button class="listen-btn" onclick="speak('${speakTxt.replace(/'/g,"\\'").replace(/"/g,"&quot;")}',this)" aria-label="Listen to question ${num}">&#128266;</button>
+    <p class="q-text"><span class="q-num">${num}.</span> ${q.text}</p>
+  </div>
+  <div class="mc-opts">${optsHtml}</div>`;
+  container.appendChild(d);
+}
+
+function pickC(el,id,val){
+  document.querySelectorAll(`.c-opt[data-id="${id}"]`).forEach(e=>e.classList.remove("selected"));
+  el.classList.add("selected"); sel[id]=val;
+}
+function pickM(el,id,val){
+  document.querySelectorAll(`.mc-opt[data-id="${id}"]`).forEach(e=>e.classList.remove("selected"));
+  el.classList.add("selected"); sel[id]=val;
+}
+
+// ── RENDER ALL QUESTIONS ─────────────────────────────────
+let qn = 1;
+[["a",QS.a,true],["b1",QS.b1,true],["b2",QS.b2,true],["c1",QS.c1,false],["c2",QS.c2,false]].forEach(([id,qs,circle])=>{
+  const c = document.getElementById("sec-"+id);
+  qs.forEach(q => { circle ? buildCircle(q,qn++,c) : buildMC(q,qn++,c); });
+});
+
+// ── LISTENING PASSAGE PLAYER ─────────────────────────────
+let pPlaying=false, pCount=0;
+const PASSAGE_TXT = "Tom has a small dog. His dog's name is Pip. Pip loves to run in the garden. One day, Pip runs out of the gate. Tom is scared. He calls Pip's name. He looks behind every tree. Then he hears a bark. Pip is under the big chair. Tom gives Pip a hug. He is very happy.";
+
+function togglePassage(){
+  if(pPlaying){
+    if(typeof responsiveVoice!=="undefined") responsiveVoice.cancel();
+    else speechSynthesis.cancel();
+    resetPass(); return;
+  }
+  pPlaying=true; pCount=0;
+  document.getElementById("pbtn").innerHTML="&#9646;&#9646;";
+  playPass();
+}
+function resetPass(){
+  pPlaying=false; pCount=0;
+  document.getElementById("pbtn").innerHTML="&#9654;";
+  document.getElementById("astatus").textContent="Press play to begin · passage plays twice automatically";
+}
+function playPass(){
+  pCount++;
+  document.getElementById("astatus").textContent=`Playing — read ${pCount} of 2…`;
+  const done=()=>{
+    if(pCount<2&&pPlaying){
+      setTimeout(()=>{ if(pPlaying) playPass(); },2000);
+    } else {
+      document.getElementById("astatus").textContent="Passage complete. Ask questions orally.";
+      resetPass();
+    }
+  };
+  if(typeof responsiveVoice!=="undefined"){
+    responsiveVoice.speak(PASSAGE_TXT,"UK English Female",{rate:0.82,pitch:1.05,onend:done});
+  } else {
+    const u=new SpeechSynthesisUtterance(PASSAGE_TXT);
+    u.lang="en-GB"; u.rate=0.78; u.pitch=1.05;
+    const voices=speechSynthesis.getVoices();
+    const female=voices.find(v=>v.lang.startsWith("en")&&/female|woman|zira|hazel|susan|karen|samantha/i.test(v.name));
+    if(female) u.voice=female;
+    u.onend=done;
+    speechSynthesis.speak(u);
+  }
+}
+
+// ── HELPERS ──────────────────────────────────────────────
+function clamp(v,mn,mx){const n=parseInt(v);return isNaN(n)?0:Math.min(mx,Math.max(mn,n));}
+
+// ── SUBMIT & SCORE ───────────────────────────────────────
+function submitExam(){
+  const name=document.getElementById("f-name").value.trim();
+  if(!name){alert("Please enter the student name before submitting.");return;}
+
+  const btn=document.getElementById("submit-btn");
+  btn.disabled=true;
+  document.getElementById("saving-msg").textContent="Marking and saving…";
+
+  let sA=0,sB=0,sC=0,sD=0;
+
+  function markCircle(groups){
+    let pts=0;
+    groups.forEach(q=>{
+      const ok=sel[q.id]===q.correct;
+      if(ok)pts+=2;
+      document.querySelectorAll(`.c-opt[data-id="${q.id}"]`).forEach(el=>{
+        el.classList.remove("selected");
+        if(el.dataset.val===q.correct)el.classList.add("correct");
+        else if(el.dataset.val===sel[q.id])el.classList.add("wrong");
+      });
+    });
+    return pts;
+  }
+  function markMC(groups){
+    let pts=0;
+    groups.forEach(q=>{
+      const ok=sel[q.id]===q.correct;
+      if(ok)pts+=2;
+      document.querySelectorAll(`.mc-opt[data-id="${q.id}"]`).forEach(el=>{
+        el.classList.remove("selected");
+        if(el.dataset.val===q.correct)el.classList.add("correct");
+        else if(el.dataset.val===sel[q.id])el.classList.add("wrong");
+      });
+    });
+    return pts;
+  }
+
+  sA=markCircle(QS.a);
+  sB=markCircle([...QS.b1,...QS.b2]);
+  const mkOk=document.getElementById("mk").value==="a";
+  const mcOk=document.getElementById("mc").value==="b";
+  if(mkOk)sB+=1; if(mcOk)sB+=1;
+  document.getElementById("mk").className=mkOk?"correct":"wrong";
+  document.getElementById("mc").className=mcOk?"correct":"wrong";
+  sC=markMC([...QS.c1,...QS.c2]);
+  sD=clamp(document.getElementById("L1").value,0,2)+
+     clamp(document.getElementById("L2").value,0,2)+
+     clamp(document.getElementById("L3").value,0,2)+
+     clamp(document.getElementById("L4").value,0,4)+
+     clamp(document.getElementById("S1a").value,0,2)+
+     clamp(document.getElementById("S1b").value,0,2)+
+     clamp(document.getElementById("S1c").value,0,2)+
+     clamp(document.getElementById("S2a").value,0,2)+
+     clamp(document.getElementById("S2b").value,0,2);
+
+  const total=sA+sB+sC+sD;
+  const pct=Math.round(total/60*100);
+  let cefr="Pre-A1 — Consider KG or ELL support";
+  if(pct>=85)cefr="A1+ — Grade 1 enrichment group";
+  else if(pct>=70)cefr="A1 — Grade 1 standard curriculum";
+  else if(pct>=50)cefr="Pre-A1 — Grade 1 targeted support";
+  else if(pct>=30)cefr="Pre-A1 — Review placement";
+
+  const now=new Date().toLocaleString("en-GB");
+  const payload={
+    timestamp:now,
+    name,
+    class:document.getElementById("f-class").value,
+    examiner:document.getElementById("f-examiner").value,
+    date:document.getElementById("f-date").value,
+    sectionA:sA, sectionB:sB, sectionC:sC, sectionD:sD,
+    total, percent:pct, cefr
+  };
+
+  // Save to Google Sheets
+  fetch(SHEET_URL,{method:"POST",body:JSON.stringify(payload)})
+    .then(r=>r.text())
+    .then(()=>{
+      document.getElementById("saving-msg").textContent="";
+      document.getElementById("r-saved").textContent="Saved to Google Sheets at "+now;
+    })
+    .catch(()=>{
+      document.getElementById("saving-msg").textContent="";
+      document.getElementById("error-msg").style.display="block";
+    });
+
+  document.getElementById("r-name").textContent=name;
+  document.getElementById("sc-a").textContent=sA;
+  document.getElementById("sc-b").textContent=sB;
+  document.getElementById("sc-c").textContent=sC;
+  document.getElementById("sc-d").textContent=sD;
+  document.getElementById("r-total").textContent=total;
+  document.getElementById("r-pct").textContent=pct;
+  document.getElementById("r-cefr").textContent=cefr;
+  const rp=document.getElementById("results");
+  rp.classList.add("show");
+  rp.scrollIntoView({behavior:"smooth",block:"start"});
+}
+</script>
+</body>
+</html>
